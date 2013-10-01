@@ -5,7 +5,7 @@
   "main": "dm.js",
   "scripts": {
     "start": "node dm",
-    "test": "grunt test"
+    "test": "grunt ci"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,11 @@
   "devDependencies": {
     "chai": "~1.8.0",
     "grunt": "~0.4.1",
-    "grunt-mocha-test": "~0.7.0"
+    "grunt-mocha-test": "~0.7.0",
+    "grunt-contrib-jshint": "~0.6.4"
+  },
+  "dependencies": {
+    "lodash": "~2.2.0",
+    "requirejs": "~2.1.8"
   }
 }
