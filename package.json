@@ -1,0 +1,19 @@
+{
+  "name": "dungeonmaster",
+  "version": "0.0.0",
+  "description": "for playing D&D",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jpbochi/dungeonmaster.git"
+  },
+  "keywords": [
+    "dnd",
+    "game"
+  ],
+  "author": "JP Bochi <jpbochi@gmail.com>",
+  "license": "MIT"
+}
