@@ -2,9 +2,9 @@
   "name": "dungeonmaster",
   "version": "0.0.0",
   "description": "for playing D&D",
-  "main": "dm.js",
+  "main": "dm-cli.js",
   "scripts": {
-    "start": "node dm",
+    "start": "node dm-cli",
     "test": "grunt ci"
   },
   "repository": {
