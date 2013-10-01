@@ -2,10 +2,24 @@ define(function (require) {
   var character = require('lib/character.js');
 
   describe('a character', function () {
+    it('has a name', function () {
+      var bob = character('bob');
+
+      expect(bob.name()).to.equal('bob');
+    });
+
     it('has a race', function () {
       var bob = character();
 
       expect(bob.race()).to.equal('human');
+      expect(bob.race('elf')).to.equal('elf');
+    });
+
+    it('can be inspected', function () {
+      var bob = character('bob');
+      bob.race('halfling');
+
+      expect(bob.inspect()).to.equal('[bob, halfling]');
     });
 
     describe('abilities', function () {
