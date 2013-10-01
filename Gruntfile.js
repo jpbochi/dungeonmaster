@@ -20,7 +20,7 @@ module.exports = function (grunt) {
       test: {
         src: [ 'tests/all.js' ],
         options: {
-          reporter: 'spec' //'mocha-unfunk-reporter'
+          reporter: 'spec'
         }
       }
     },

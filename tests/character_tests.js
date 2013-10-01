@@ -21,6 +21,17 @@ define(function (require) {
         expect(bob.wis()).to.equal(11);
         expect(bob.cha()).to.equal(10);
       });
+
+      it('can be set individually', function () {
+        var bob = character();
+
+        expect(bob.str(10)).to.equal(10);
+        expect(bob.con(11)).to.equal(11);
+        expect(bob.dex(12)).to.equal(12);
+        expect(bob.int(13)).to.equal(13);
+        expect(bob.wis(14)).to.equal(14);
+        expect(bob.cha(16)).to.equal(16);
+      });
     });
   });
 });
