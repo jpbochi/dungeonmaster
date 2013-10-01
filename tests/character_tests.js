@@ -15,11 +15,21 @@ define(function (require) {
       expect(bob.race('elf')).to.equal('elf');
     });
 
-    it('can be inspected', function () {
+    it('when inspected, shows name, level and race', function () {
       var bob = character('bob');
       bob.race('halfling');
 
-      expect(bob.inspect()).to.equal('[bob, halfling]');
+      expect(bob.inspect()).to.equal('[bob, halfling lvl 1]');
+    });
+
+    describe('level', function () {
+      it('starts at one', function () {
+        expect(character().level()).to.equal(1);
+      });
+
+      it('can be initialised', function () {
+        expect(character('Elminster', 24).level()).to.equal(24);
+      });
     });
 
     describe('abilities', function () {
