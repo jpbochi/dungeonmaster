@@ -2,8 +2,9 @@
   "name": "dungeonmaster",
   "version": "0.0.0",
   "description": "for playing D&D",
-  "main": "index.js",
+  "main": "dm.js",
   "scripts": {
+    "start": "node dm",
     "test": "grunt test"
   },
   "repository": {
