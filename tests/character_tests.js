@@ -30,6 +30,19 @@ define(function (require) {
       it('can be initialised', function () {
         expect(character('Elminster', 24).level()).to.equal(24);
       });
+
+      describe('half level modifier', function () {
+        [
+          { lvl:  1, mod: 0 },
+          { lvl:  2, mod: 1 }, { lvl: 3, mod: 1 },
+          { lvl:  4, mod: 2 }, { lvl: 5, mod: 2 },
+          { lvl:  6, mod: 3 },
+        ].forEach(function (test) {
+          it('is ' + test.mod + ' on level ' + test.lvl, function () {
+            expect(character(null, test.lvl).halfLevel()).to.equal(test.mod);
+          });
+        });
+      });
     });
 
     describe('abilities', function () {
