@@ -1,0 +1,25 @@
+{
+  "indent": 2,
+  "expr": true,
+  "bitwise": true,
+  "camelcase": false,
+  "curly": true,
+  "immed": true,
+  "noarg": true,
+  "nonew": true,
+  "plusplus": true,
+  "trailing": true,
+  "maxparams": 3,
+  "maxlen": 99,
+  "browser": false,
+  "nomen": false,
+  "jquery": false,
+  "white": true,
+  "undef": true,
+  "globals": {
+    "console": true, "process": true,
+    "require": true, "define": true,
+    "describe": true, "it": true, "beforeEach": true, "afterEach": true,
+    "expect": true
+  }
+}
