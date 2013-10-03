@@ -13,6 +13,7 @@ define(function (require) {
 
       expect(bob.race()).to.equal('human');
       expect(bob.race('elf')).to.equal('elf');
+      expect(bob.race()).to.equal('elf');
     });
 
     it('when inspected, shows name, level and race', function () {
