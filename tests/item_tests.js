@@ -23,5 +23,16 @@ define(function (require) {
       expect(spellbook.price(50)).to.equal(50);
       expect(spellbook.price()).to.equal(50);
     });
+
+    describe('tags', function () {
+      function longsword() {
+        return item().withTags('weapon', 'one-handed', 'heavy-blade', 'military', 'versatile');
+      }
+
+      it('can be consulted', function () {
+        expect(longsword().hasTag('versatile')).to.be.true;
+        expect(longsword().hasTag('implement')).to.be.false;
+      });
+    });
   });
 });
