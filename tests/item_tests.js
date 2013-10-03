@@ -15,5 +15,13 @@ define(function (require) {
       expect(dagger.weight(1)).to.equal(1);
       expect(dagger.weight()).to.equal(1);
     });
+
+    it('has a price', function () {
+      var spellbook = item();
+
+      expect(spellbook.price()).to.equal(null);
+      expect(spellbook.price(50)).to.equal(50);
+      expect(spellbook.price()).to.equal(50);
+    });
   });
 });
