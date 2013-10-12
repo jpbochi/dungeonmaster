@@ -91,18 +91,46 @@ define(function (require) {
           expect(bob.actions()).to.eql(['basic_melee_attack']);
         });
 
-        it('has same damage as weapon', function () {
-          expect(basicAttack().hit.damage).to.equal('2d6');
-        });
-
         it('is defended with AC', function () {
           expect(basicAttack().defense).to.equal('AC');
         });
 
-        it('adds half level to attack bonus', function () {
-          bob.level(11);
+        it('can be used at-will', function () {
+          expect(basicAttack().usage).to.equal('at-will');
+        });
 
-          expect(basicAttack().bonus).to.equal(5);
+        it('has Martial and Weapon keywords', function () {
+          expect(basicAttack().keywords).to.eql(['martial', 'weapon']);
+        });
+
+        it('is Melee weapon', function () {
+          expect(basicAttack().type).to.equal('melee_weapon');
+        });
+
+        it('targets one creature', function () {
+          expect(basicAttack().target).to.equal('one_creature');
+        });
+
+        it('is a standard action', function () {
+          expect(basicAttack().timeCost).to.equal('standard');
+        });
+
+        describe('hit', function () {
+          it('damage is 1[W] when char has no bonus', function () {
+            expect(basicAttack().hit.damage).to.equal('2d6');
+          });
+
+          it.skip('damage is 1[W] + Strength', function () {
+            bob.str(18);
+            expect(basicAttack().hit.damage).to.equal('2d6+4');
+          });
+        });
+
+        describe('attack bonus', function () {
+          it('includes half level', function () {
+            bob.level(11);
+            expect(basicAttack().bonus).to.equal(5);
+          });
         });
       });
     });
