@@ -2,13 +2,13 @@ define(function (require) {
   var weapon = require('lib/weapon.js');
 
   describe('an weapon', function () {
-    it.skip('is an item', function () {
-      var weapon = weapon();
+    it('is an item', function () {
+      var w = weapon();
 
-      expect(weapon.name).to.instanceOf(Function);
-      expect(weapon.weight).to.instanceOf(Function);
-      expect(weapon.price).to.instanceOf(Function);
-      expect(weapon.hasTag).to.instanceOf(Function);
+      expect(w.name).to.instanceOf(Function);
+      expect(w.weight).to.instanceOf(Function);
+      expect(w.price).to.instanceOf(Function);
+      expect(w.hasTag).to.instanceOf(Function);
     });
 
     it('does damage', function () {
