@@ -20,7 +20,7 @@ define(function (require) {
       var bob = character('bob');
       bob.race('halfling');
 
-      expect(bob.inspect()).to.equal('[bob, halfling lvl 1]');
+      expect(bob.inspect()).to.equal('[bob, halfling, lvl 1]');
     });
 
     describe('level', function () {
