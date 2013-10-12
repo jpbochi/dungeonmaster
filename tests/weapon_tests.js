@@ -18,5 +18,13 @@ define(function (require) {
       expect(spear.damage('1d10')).to.equal(spear);
       expect(spear.damage()).to.equal('1d10');
     });
+
+    it('has proficience bonus', function () {
+      var shortsword = weapon('shortsword');
+
+      expect(shortsword.profBonus()).to.equal(0);
+      expect(shortsword.profBonus(3)).to.equal(shortsword);
+      expect(shortsword.profBonus()).to.equal(3);
+    });
   });
 });
