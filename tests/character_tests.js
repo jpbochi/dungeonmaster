@@ -1,5 +1,6 @@
 define(function (require) {
   var character = require('lib/character.js');
+  var weapon = require('lib/weapon.js');
 
   describe('a character', function () {
     it('has a name', function () {
@@ -62,6 +63,29 @@ define(function (require) {
       expect(bob.intMod).to.instanceOf(Function);
       expect(bob.wisMod).to.instanceOf(Function);
       expect(bob.chaMod).to.instanceOf(Function);
+    });
+
+    describe('wielding a melee weapon', function () {
+      function aWeapon() {
+        return weapon('maul').damage('2d6');
+      }
+
+      function bob() {
+        var b = character();
+        b.wield(aWeapon());
+        return b;
+      }
+
+      describe('basic melee attack', function () {
+        it('is available', function () {
+          expect(bob().actions()).to.eql(['basic_melee_attack']);
+        });
+
+        it('has same damage as weapon', function () {
+          var attack = bob().action('basic_melee_attack');
+          expect(attack.hit.damage).to.equal('2d6');
+        });
+      });
     });
   });
 });
