@@ -12,7 +12,7 @@ define(function (require) {
       var bob = character();
 
       expect(bob.race()).to.equal('human');
-      expect(bob.race('elf')).to.equal('elf');
+      expect(bob.race('elf')).to.equal(bob);
       expect(bob.race()).to.equal('elf');
     });
 

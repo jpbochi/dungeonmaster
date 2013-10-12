@@ -15,7 +15,7 @@ define(function (require) {
       var spear = weapon('longspear');
 
       expect(spear.damage()).to.equal('');
-      expect(spear.damage('1d10')).to.equal('1d10');
+      expect(spear.damage('1d10')).to.equal(spear);
       expect(spear.damage()).to.equal('1d10');
     });
   });

@@ -12,7 +12,7 @@ define(function (require) {
       var dagger = item();
 
       expect(dagger.weight()).to.equal(0);
-      expect(dagger.weight(1)).to.equal(1);
+      expect(dagger.weight(1)).to.equal(dagger);
       expect(dagger.weight()).to.equal(1);
     });
 
@@ -20,7 +20,7 @@ define(function (require) {
       var spellbook = item();
 
       expect(spellbook.price()).to.equal(null);
-      expect(spellbook.price(50)).to.equal(50);
+      expect(spellbook.price(50)).to.equal(spellbook);
       expect(spellbook.price()).to.equal(50);
     });
 
