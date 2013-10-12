@@ -70,25 +70,39 @@ define(function (require) {
         return weapon('maul').damage('2d6');
       }
 
-      function bob() {
+      function anArmedCharacter() {
         var b = character();
         b.wield(aWeapon());
         return b;
       }
 
       describe('basic melee attack', function () {
+        var bob, attack;
+
+        beforeEach(function () {
+          bob = anArmedCharacter();
+        });
+
+        function basicAttack() {
+          return bob.action('basic_melee_attack');
+        }
+
         it('is available', function () {
-          expect(bob().actions()).to.eql(['basic_melee_attack']);
+          expect(bob.actions()).to.eql(['basic_melee_attack']);
         });
 
         it('has same damage as weapon', function () {
-          var attack = bob().action('basic_melee_attack');
-          expect(attack.hit.damage).to.equal('2d6');
+          expect(basicAttack().hit.damage).to.equal('2d6');
+        });
+
+        it('is defended with AC', function () {
+          expect(basicAttack().defense).to.equal('AC');
         });
 
         it('adds half level to attack bonus', function () {
-          var attack = bob().level(11).action('basic_melee_attack');
-          expect(attack.bonus).to.equal(5);
+          bob.level(11);
+
+          expect(basicAttack().bonus).to.equal(5);
         });
       });
     });
