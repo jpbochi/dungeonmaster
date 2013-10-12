@@ -85,6 +85,11 @@ define(function (require) {
           var attack = bob().action('basic_melee_attack');
           expect(attack.hit.damage).to.equal('2d6');
         });
+
+        it('adds half level to attack bonus', function () {
+          var attack = bob().level(11).action('basic_melee_attack');
+          expect(attack.bonus).to.equal(5);
+        });
       });
     });
   });
