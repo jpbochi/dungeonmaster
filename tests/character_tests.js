@@ -76,7 +76,7 @@ define(function (require) {
         return b;
       }
 
-      describe('basic melee attack', function () {
+      describe('melee basic attack PHB (pg287)', function () {
         var bob, attack;
 
         beforeEach(function () {
@@ -99,8 +99,8 @@ define(function (require) {
           expect(basicAttack().usage).to.equal('at-will');
         });
 
-        it('has Martial and Weapon keywords', function () {
-          expect(basicAttack().keywords).to.eql(['martial', 'weapon']);
+        it('has Weapon keywords', function () {
+          expect(basicAttack().keywords).to.eql(['weapon']);
         });
 
         it('its type is melee weapon', function () {
@@ -123,6 +123,11 @@ define(function (require) {
           it('damage is 1[W] + Strength', function () {
             bob.str(18);
             expect(basicAttack().hit.damage()).to.equal('2d6+6');
+          });
+
+          it.skip('damage is 2[W] + Strength when lvl>=21', function () {
+            bob.level(21);
+            expect(basicAttack().hit.damage()).to.equal('4d6+6');
           });
         });
 
