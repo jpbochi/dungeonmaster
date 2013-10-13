@@ -31,5 +31,19 @@ define(function (require) {
       expect(shortsword.profBonus(3)).to.equal(shortsword);
       expect(shortsword.profBonus()).to.equal(3);
     });
+
+    it('can have a magic enhancement', function () {
+      var magic = weapon('dagger+1');
+
+      expect(magic.enhancement()).to.equal(0);
+      expect(magic.enhancement(1)).to.equal(magic);
+      expect(magic.enhancement()).to.equal(1);
+    });
+
+    it('magic enhancement adds damage', function () {
+      var magic = weapon('warhammer+2').damage('1d10').enhancement(2);
+
+      expect(magic.damage()).to.equal('1d10+2');
+    });
   });
 });
