@@ -20,6 +20,7 @@ define(function (require) {
       expect(damage('1d6+2').addBonus(3).toString()).to.equal('1d6+5');
       expect(damage('1d8+1').addBonus(-4).toString()).to.equal('1d8-3');
       expect(damage('1d10-1').addBonus(3).toString()).to.equal('1d10+2');
+      expect(damage('1d12+1').addBonus(-1).toString()).to.equal('1d12');
     });
   });
 });

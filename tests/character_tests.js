@@ -117,12 +117,12 @@ define(function (require) {
 
         describe('hit', function () {
           it('damage is 1[W] when char has no bonus', function () {
-            expect(basicAttack().hit.damage).to.equal('2d6');
+            expect(basicAttack().hit.damage()).to.equal('2d6');
           });
 
-          it.skip('damage is 1[W] + Strength', function () {
+          it('damage is 1[W] + Strength', function () {
             bob.str(18);
-            expect(basicAttack().hit.damage).to.equal('2d6+4');
+            expect(basicAttack().hit.damage()).to.equal('2d6+4');
           });
         });
 
