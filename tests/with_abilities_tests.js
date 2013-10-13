@@ -2,7 +2,7 @@ define(function (require) {
   var withAbilities = require('lib/with_abilities.js');
 
   describe('withAbilities', function () {
-    it('has strengh, constitution, dexterity, intelligence, wisdom, and charisma', function () {
+    it('has strength, constitution, dexterity, intelligence, wisdom, and charisma', function () {
       var bob = withAbilities({});
 
       bob.abilities([16, 14, 13, 12, 11, 10]);

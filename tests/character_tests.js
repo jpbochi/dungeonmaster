@@ -129,7 +129,12 @@ define(function (require) {
         describe('attack bonus', function () {
           it('includes half level', function () {
             bob.level(11);
-            expect(basicAttack().bonus).to.equal(5);
+            expect(basicAttack().bonus()).to.equal(5);
+          });
+
+          it('includes strengh modifier', function () {
+            bob.str(16);
+            expect(basicAttack().bonus()).to.equal(3);
           });
         });
       });
