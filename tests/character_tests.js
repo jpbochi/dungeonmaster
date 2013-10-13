@@ -67,7 +67,7 @@ define(function (require) {
 
     describe('wielding a melee weapon', function () {
       function aWeapon() {
-        return weapon('maul').damage('2d6');
+        return weapon('magic maul').damage('2d6').enhancement(2);
       }
 
       function anArmedCharacter() {
@@ -103,7 +103,7 @@ define(function (require) {
           expect(basicAttack().keywords).to.eql(['martial', 'weapon']);
         });
 
-        it('is Melee weapon', function () {
+        it('its type is melee weapon', function () {
           expect(basicAttack().type).to.equal('melee_weapon');
         });
 
@@ -117,24 +117,28 @@ define(function (require) {
 
         describe('hit', function () {
           it('damage is 1[W] when char has no bonus', function () {
-            expect(basicAttack().hit.damage()).to.equal('2d6');
+            expect(basicAttack().hit.damage()).to.equal('2d6+2');
           });
 
           it('damage is 1[W] + Strength', function () {
             bob.str(18);
-            expect(basicAttack().hit.damage()).to.equal('2d6+4');
+            expect(basicAttack().hit.damage()).to.equal('2d6+6');
           });
         });
 
         describe('attack bonus', function () {
+          it('includes weapon bonus', function () {
+            expect(basicAttack().bonus()).to.equal(2);
+          });
+
           it('includes half level', function () {
             bob.level(11);
-            expect(basicAttack().bonus()).to.equal(5);
+            expect(basicAttack().bonus()).to.equal(2 + 5);
           });
 
           it('includes strengh modifier', function () {
             bob.str(16);
-            expect(basicAttack().bonus()).to.equal(3);
+            expect(basicAttack().bonus()).to.equal(2 + 3);
           });
         });
       });
