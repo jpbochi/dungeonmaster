@@ -32,7 +32,7 @@ module.exports = function (grunt) {
   grunt.registerTask('check_tests', 'Search for temporary filters on tets.', function () {
     var done = this.async();
     var child = exec(
-      "git grep '\\.only(' ./tests/ || :",
+      "git grep '\\.only(' ./tests/ || exit 0",
       { timeout: 9000 },
       function (error, stdout, stderr) {
         if (stdout) {
