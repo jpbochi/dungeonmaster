@@ -85,7 +85,7 @@ define(function (require) {
         });
 
         function basicAttack() {
-          return bob.action('melee_basic_attack');
+          return bob.action('basic_melee_attack');
         }
 
         it.skip('is available'); //not sure what's the best interface for that yet
@@ -148,7 +148,7 @@ define(function (require) {
       });
     });
 
-    describe.skip('wielding a ranged weapon', function () {
+    describe('wielding a ranged weapon', function () {
       function aWeapon() {
         return weapon('magic longbow').damage('1d10+1').withTags('ranged');
       }
@@ -203,7 +203,7 @@ define(function (require) {
 
           it('damage is 1[W] + Dexterity', function () {
             bob.dex(18);
-            expect(basicAttack().hitDamage()).to.equal('1d10+3');
+            expect(basicAttack().hitDamage()).to.equal('1d10+5');
           });
 
           it.skip('damage is 2[W] + Dexterity when lvl>=21', function () {
@@ -215,12 +215,12 @@ define(function (require) {
         describe('attack bonus', function () {
           it('includes half level', function () {
             bob.level(13);
-            expect(basicAttack().bonus()).to.equal(6);
+            expect(basicAttack().bonus()).to.equal(1 + 6);
           });
 
           it('includes Dexterity modifier', function () {
             bob.dex(16);
-            expect(basicAttack().bonus()).to.equal(3);
+            expect(basicAttack().bonus()).to.equal(1 + 3);
           });
         });
       });
