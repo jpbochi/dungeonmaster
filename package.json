@@ -26,6 +26,7 @@
   "dependencies": {
     "lodash": "~2.2.0",
     "requirejs": "~2.1.8",
-    "advice": "~0.1.0"
+    "advice": "~0.1.0",
+    "bilby": "0.0.2"
   }
 }

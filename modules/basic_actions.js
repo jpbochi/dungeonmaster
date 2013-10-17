@@ -37,24 +37,39 @@ define(['lib/util.js', 'lib/power.js', 'lib/damage.js'], function (util, power, 
     return attack;
   };
 
+  var env = util.env()
+  .method(
+    'action',
+    function (character, action) {
+      var wielding = character.wield();
+      return action === 'basic_melee_attack' && wielding && wielding.hasTag('melee');
+    },
+    function (character) {
+      var wielding = character.wield();
+      return basicMeleeAttack(character, wielding);
+    }
+  ).method(
+    'action',
+    function (character, action) {
+      var wielding = character.wield();
+      return action === 'basic_ranged_attack' && wielding && wielding.hasTag('ranged');
+    },
+    function (character) {
+      var wielding = character.wield();
+      return basicRangedAttack(character, wielding);
+    }
+  ).method(
+    'action',
+    util.bilby.constant(true),
+    util.bilby.constant(null)
+  );
+
   return {
     extend: function (dm) {
       dm.around('character', function (base) {
         var self = base.apply(this, [].slice.call(arguments, 1));
 
-        util.advice.call(self);
-        self.around('action', function (base, action) {
-          var wielding = self.wield();
-
-          if (wielding) {
-            if (action === 'basic_melee_attack' && wielding.hasTag('melee')) {
-              return basicMeleeAttack(self, wielding);
-            } else if (action === 'basic_ranged_attack' && wielding.hasTag('ranged')) {
-              return basicRangedAttack(self, wielding);
-            }
-          }
-          return base.apply(this, [].slice.call(arguments, 1));
-        });
+        self.env(env);
 
         return self;
       });
