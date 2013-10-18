@@ -2,39 +2,35 @@ define(['lib/util.js', 'lib/power.js', 'lib/damage.js'], function (util, power, 
   'use strict';
 
   var basicMeleeAttack = function (character, weapon) {
-    var attack = power('melee_basic_attack')
+    return power('melee_basic_attack')
       .usage('at-will')
       .timeCost('standard')
       .type('melee_weapon')
       .target('one_creature')
       .keywords(['weapon'])
-      .defense('AC');
-
-    attack.bonus = function () {
-      return damage(weapon.damage()).bonus() + character.halfLevel() + character.strMod();
-    };
-    attack.hitDamage = function () {
-      return damage(weapon.damage()).addBonus(character.strMod()).toString();
-    };
-    return attack;
+      .defense('AC')
+      .bonus(function () {
+        return damage(weapon.damage()).bonus() + character.halfLevel() + character.strMod();
+      })
+      .hitDamage(function () {
+        return damage(weapon.damage()).addBonus(character.strMod()).toString();
+      });
   };
 
   var basicRangedAttack = function (character, weapon) {
-    var attack = power('melee_basic_attack')
+    return power('melee_basic_attack')
       .usage('at-will')
       .timeCost('standard')
       .type('ranged_weapon')
       .target('one_creature')
       .keywords(['weapon'])
-      .defense('AC');
-
-    attack.bonus = function () {
-      return damage(weapon.damage()).bonus() + character.halfLevel() + character.dexMod();
-    };
-    attack.hitDamage = function () {
-      return damage(weapon.damage()).addBonus(character.dexMod()).toString();
-    };
-    return attack;
+      .defense('AC')
+      .bonus(function () {
+        return damage(weapon.damage()).bonus() + character.halfLevel() + character.dexMod();
+      })
+      .hitDamage(function () {
+        return damage(weapon.damage()).addBonus(character.dexMod()).toString();
+      });
   };
 
   var env = util.env()

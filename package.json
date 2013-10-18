@@ -24,7 +24,7 @@
     "grunt-contrib-jshint": "~0.6.4"
   },
   "dependencies": {
-    "lodash": "~2.2.0",
+    "lodash": "~2.2.1",
     "requirejs": "~2.1.8",
     "advice": "~0.1.0",
     "bilby": "0.0.2"
