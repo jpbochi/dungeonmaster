@@ -1,7 +1,8 @@
 define(['lib/util.js', 'lib/power.js', 'lib/damage.js'], function (util, power, damage) {
   'use strict';
 
-  var basicMeleeAttack = function (character, weapon) {
+  var basicMeleeAttack = function (character) {
+    var weapon = character.wield();
     return power('melee_basic_attack')
       .usage('at-will')
       .timeCost('standard')
@@ -17,7 +18,8 @@ define(['lib/util.js', 'lib/power.js', 'lib/damage.js'], function (util, power, 
       });
   };
 
-  var basicRangedAttack = function (character, weapon) {
+  var basicRangedAttack = function (character) {
+    var weapon = character.wield();
     return power('melee_basic_attack')
       .usage('at-will')
       .timeCost('standard')
@@ -33,27 +35,22 @@ define(['lib/util.js', 'lib/power.js', 'lib/damage.js'], function (util, power, 
       });
   };
 
+  var actionWielding = function (action, wieldingTag) {
+    return function (character, action) {
+      var wielding = character.wield();
+      return action === action && wielding && wielding.hasTag(wieldingTag);
+    };
+  };
+
   var env = util.env()
   .method(
     'action',
-    function (character, action) {
-      var wielding = character.wield();
-      return action === 'basic_melee_attack' && wielding && wielding.hasTag('melee');
-    },
-    function (character) {
-      var wielding = character.wield();
-      return basicMeleeAttack(character, wielding);
-    }
+    actionWielding('basic_melee_attack', 'melee'),
+    basicMeleeAttack
   ).method(
     'action',
-    function (character, action) {
-      var wielding = character.wield();
-      return action === 'basic_ranged_attack' && wielding && wielding.hasTag('ranged');
-    },
-    function (character) {
-      var wielding = character.wield();
-      return basicRangedAttack(character, wielding);
-    }
+    actionWielding('basic_ranged_attack', 'ranged'),
+    basicRangedAttack
   ).method(
     'action',
     util.bilby.constant(true),
