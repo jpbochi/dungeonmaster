@@ -27,6 +27,9 @@
     "lodash": "~2.2.1",
     "requirejs": "~2.1.8",
     "advice": "~0.1.0",
-    "bilby": "0.0.2"
+    "bilby": "0.0.2",
+    "optimist": "~0.6.0",
+    "digger-selector": "0.0.8",
+    "specificity": "~0.1.3"
   }
 }

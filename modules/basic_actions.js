@@ -1,4 +1,9 @@
-define(['lib/util.js', 'lib/power.js', 'lib/damage.js'], function (util, power, damage) {
+define([
+  'lib/util.js',
+  'lib/power.js',
+  'lib/damage.js',
+  'lodash'
+], function (util, power, damage, _) {
   'use strict';
 
   var basicMeleeAttack = function (character) {
@@ -42,30 +47,18 @@ define(['lib/util.js', 'lib/power.js', 'lib/damage.js'], function (util, power, 
     };
   };
 
-  var env = util.env()
-  .method(
-    'action',
-    actionWielding('basic_melee_attack', 'melee'),
-    basicMeleeAttack
-  ).method(
-    'action',
-    actionWielding('basic_ranged_attack', 'ranged'),
-    basicRangedAttack
-  ).method(
-    'action',
-    util.bilby.constant(true),
-    util.bilby.constant(null)
-  );
+  var actions = [
+    {
+      predicate: actionWielding('basic_melee_attack', 'melee'), //#basic_melee_attack hand.melee
+      action: basicMeleeAttack
+    },
+    {
+      predicate: actionWielding('basic_ranged_attack', 'ranged'), //#basic_ranged_attack hand.ranged
+      action: basicRangedAttack
+    }
+  ];
 
   return {
-    extend: function (dm) {
-      dm.around('character', function (base) {
-        var self = base.apply(this, [].slice.call(arguments, 1));
-
-        self.env(env);
-
-        return self;
-      });
-    }
+    actions: actions
   };
 });
