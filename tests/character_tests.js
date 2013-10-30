@@ -150,7 +150,7 @@ define(function (require) {
 
     describe('wielding a ranged weapon', function () {
       function aWeapon() {
-        return weapon('magic longbow').damage('1d10+1').withTags('ranged');
+        return weapon('magic longbow').damage('1d10').enhancement(1).withTags('ranged');
       }
 
       function anArmedCharacter() {

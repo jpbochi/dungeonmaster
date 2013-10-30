@@ -16,7 +16,7 @@ define([
       .keywords(['weapon'])
       .defense('AC')
       .bonus(function () {
-        return damage(weapon.damage()).bonus() + character.halfLevel() + character.strMod();
+        return weapon.enhancement() + character.halfLevel() + character.strMod();
       })
       .hitDamage(function () {
         return damage(weapon.damage()).addBonus(character.strMod()).toString();
@@ -33,7 +33,7 @@ define([
       .keywords(['weapon'])
       .defense('AC')
       .bonus(function () {
-        return damage(weapon.damage()).bonus() + character.halfLevel() + character.dexMod();
+        return weapon.enhancement() + character.halfLevel() + character.dexMod();
       })
       .hitDamage(function () {
         return damage(weapon.damage()).addBonus(character.dexMod()).toString();
