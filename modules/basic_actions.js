@@ -16,9 +16,11 @@ define([
       .keywords(['weapon'])
       .defense('AC')
       .bonus(function () {
+        // halfLevel + abilMod + profMod + weaponEnh
         return weapon.enhancement() + character.halfLevel() + character.strMod();
       })
       .hitDamage(function () {
+        // weaponDmg + abilMod
         return damage(weapon.damage()).addBonus(character.strMod()).toString();
       });
   };
