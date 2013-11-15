@@ -18,12 +18,23 @@ define(function (require) {
     it('can be set individually', function () {
       var bob = withAbilities({});
 
-      expect(bob.str(10)).to.equal(10);
-      expect(bob.con(11)).to.equal(11);
-      expect(bob.dex(12)).to.equal(12);
-      expect(bob.int(13)).to.equal(13);
-      expect(bob.wis(14)).to.equal(14);
-      expect(bob.cha(16)).to.equal(16);
+      expect(bob.str(10)).to.equal(bob);
+      expect(bob.str()).to.equal(10);
+
+      expect(bob.con(11)).to.equal(bob);
+      expect(bob.con()).to.equal(11);
+
+      expect(bob.dex(12)).to.equal(bob);
+      expect(bob.dex()).to.equal(12);
+
+      expect(bob.int(13)).to.equal(bob);
+      expect(bob.int()).to.equal(13);
+
+      expect(bob.wis(14)).to.equal(bob);
+      expect(bob.wis()).to.equal(14);
+
+      expect(bob.cha(16)).to.equal(bob);
+      expect(bob.cha()).to.equal(16);
     });
 
     describe('modifiers', function () {

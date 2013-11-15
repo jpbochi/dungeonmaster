@@ -66,6 +66,23 @@ define(function (require) {
       expect(bob.chaMod).to.instanceOf(Function);
     });
 
+    describe('has initiative', function () {
+      it('starts with zero', function () {
+        var bob = character();
+        expect(bob.initiative()).to.equal(0);
+      });
+
+      it('adds half level', function () {
+        var bob = character().level(7);
+        expect(bob.initiative()).to.equal(3);
+      });
+
+      it('adds Dexterity modifier', function () {
+        var bob = character().dex(18);
+        expect(bob.initiative()).to.equal(4);
+      });
+    });
+
     describe('wielding a melee weapon', function () {
       function aWeapon() {
         return weapon('magic maul').damage('2d6').enhancement(2).withTags('melee');
