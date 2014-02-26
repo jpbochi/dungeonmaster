@@ -3,26 +3,21 @@ define(function (require) {
   var character = dm.character;
   var weapon = dm.weapon;
 
-  describe('wielding a melee weapon', function () {
-    function aWeapon() {
-      return weapon('magic maul').damage('2d6').enhancement(2).withTags('melee');
-    }
+  describe('melee basic attack PHB (pg287)', function () {
+    describe('wielding a melee weapon', function () {
+      function aWeapon() {
+        return weapon('magic maul').damage('2d6').enhancement(2).withTags('melee');
+      }
 
-    function anArmedCharacter() {
-      var b = character();
-      b.wield(aWeapon());
-      return b;
-    }
+      function bob() {
+        var b = character();
+        b.wield(aWeapon());
+        return b;
+      }
 
-    describe('melee basic attack PHB (pg287)', function () {
-      var bob, attack;
-
-      beforeEach(function () {
-        bob = anArmedCharacter();
-      });
-
-      function basicAttack() {
-        return bob.action('basic_melee_attack');
+      function basicAttack(character) {
+        character = character || bob();
+        return character.action('basic_melee_attack');
       }
 
       it.skip('is available'); //not sure what's the best interface for that yet
@@ -57,13 +52,11 @@ define(function (require) {
         });
 
         it('damage is 1[W] + Strength', function () {
-          bob.str(18);
-          expect(basicAttack().hitDamage()).to.equal('2d6+6');
+          expect(basicAttack(bob().str(18)).hitDamage()).to.equal('2d6+6');
         });
 
         it.skip('damage is 2[W] + Strength when lvl>=21', function () {
-          bob.level(21);
-          expect(basicAttack().hitDamage()).to.equal('4d6+6');
+          expect(basicAttack(bob().level(21)).hitDamage()).to.equal('4d6+6');
         });
       });
 
@@ -73,38 +66,31 @@ define(function (require) {
         });
 
         it('includes half level', function () {
-          bob.level(11);
-          expect(basicAttack().bonus()).to.equal(2 + 5);
+          expect(basicAttack(bob().level(11)).bonus()).to.equal(2 + 5);
         });
 
         it('includes Strength modifier', function () {
-          bob.str(16);
-          expect(basicAttack().bonus()).to.equal(2 + 3);
+          expect(basicAttack(bob().str(16)).bonus()).to.equal(2 + 3);
         });
       });
     });
   });
 
-  describe('wielding a ranged weapon', function () {
-    function aWeapon() {
-      return weapon('magic longbow').damage('1d10').enhancement(1).withTags('ranged');
-    }
+  describe('ranged basic attack PHB (pg287)', function () {
+    describe('wielding a ranged weapon', function () {
+      function aWeapon() {
+        return weapon('magic longbow').damage('1d10').enhancement(1).withTags('ranged');
+      }
 
-    function anArmedCharacter() {
-      var b = character();
-      b.wield(aWeapon());
-      return b;
-    }
+      function bob() {
+        var b = character();
+        b.wield(aWeapon());
+        return b;
+      }
 
-    describe('ranged basic attack PHB (pg287)', function () {
-      var bob, attack;
-
-      beforeEach(function () {
-        bob = anArmedCharacter();
-      });
-
-      function basicAttack() {
-        return bob.action('basic_ranged_attack');
+      function basicAttack(character) {
+        character = character || bob();
+        return character.action('basic_ranged_attack');
       }
 
       it.skip('is available'); //not sure what's the best interface for that yet
@@ -139,25 +125,21 @@ define(function (require) {
         });
 
         it('damage is 1[W] + Dexterity', function () {
-          bob.dex(18);
-          expect(basicAttack().hitDamage()).to.equal('1d10+5');
+          expect(basicAttack(bob().dex(18)).hitDamage()).to.equal('1d10+5');
         });
 
         it.skip('damage is 2[W] + Dexterity when lvl>=21', function () {
-          bob.level(21);
-          expect(basicAttack().hitDamage()).to.equal('2d10+3');
+          expect(basicAttack(bob().level(21)).hitDamage()).to.equal('2d10+3');
         });
       });
 
       describe('attack bonus', function () {
         it('includes half level', function () {
-          bob.level(13);
-          expect(basicAttack().bonus()).to.equal(1 + 6);
+          expect(basicAttack(bob().level(13)).bonus()).to.equal(1 + 6);
         });
 
         it('includes Dexterity modifier', function () {
-          bob.dex(16);
-          expect(basicAttack().bonus()).to.equal(1 + 3);
+          expect(basicAttack(bob().dex(16)).bonus()).to.equal(1 + 3);
         });
       });
     });
