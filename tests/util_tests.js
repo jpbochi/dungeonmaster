@@ -19,7 +19,7 @@ define(function (require) {
         var prop = util.property('old value');
         prop('new value');
 
-       expect(prop()).to.equal('new value');
+        expect(prop()).to.equal('new value');
       });
 
       it('returns the object that contains the property so it can be chained', function () {
@@ -28,6 +28,44 @@ define(function (require) {
         };
 
         expect(obj.prop('something new')).to.equal(obj);
+      });
+    });
+
+    describe('with a default value', function () {
+      it('is not default if truthy', function () {
+        var prop = util.property().withDefault('default');
+        prop('not default');
+
+        expect(prop()).to.equal('not default');
+      });
+
+      it('is default if false', function () {
+        var prop = util.property().withDefault('default for `false`');
+        prop(false);
+
+        expect(prop()).to.equal('default for `false`');
+      });
+
+      it('is default if null', function () {
+        var prop = util.property().withDefault('default for `null`');
+        prop(null);
+
+        expect(prop()).to.equal('default for `null`');
+      });
+
+      it('is default if undefined', function () {
+        var prop = util.property().withDefault('default for `undefined`');
+        prop(undefined);
+
+        expect(prop()).to.equal('default for `undefined`');
+      });
+
+      it('still returns the object when setting', function () {
+        var obj = {
+          prop: util.property().withDefault('whatever')
+        };
+
+        expect(obj.prop('something else')).to.equal(obj);
       });
     });
   });
